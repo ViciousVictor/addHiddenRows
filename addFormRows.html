@@ -1,0 +1,77 @@
+<html>
+<body>
+
+<div id="widgetHiddenAdd">
+    <input type="hidden" value="" class="shownVar">
+    <div class="record1">
+        <input  />
+        <select >
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+        </select>
+    </div>
+    <div class="record2">
+        <input />
+        <select >
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+        </select>
+    </div>
+    <div class="record3">
+        <input id="input1_1" name="input1_1" />
+        <select id="input-1_2" name="input1_2">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+        </select>
+    </div>
+    <div class="record4">
+        <input />
+        <select >
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+        </select>
+    </div>
+    <input type="button" class="addButton" value="add">
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+
+    function executeHiddenAdd(parentWrap) {
+        var maxRecord = 4;
+        var shownVar = parentWrap.find(".shownVar");
+        var shown = parseInt(shownVar.val(), 10);
+        var addButton = parentWrap.find(".addButton");
+
+        if (isNaN(shown) || shown < 2) {
+            shown = 2;
+        }
+        //alert( shown );
+        (function () {
+            for (i = maxRecord; i > shown; i--) {
+                $(".record" + i).hide();
+            }
+        })();
+        testMaxReached();
+
+        addButton.on('click', function () {
+            $(".record" + (++shown)).show();
+            shownVar.val(shown);
+            testMaxReached()
+        });
+
+        function testMaxReached() {
+            if (shown >= maxRecord) {
+                addButton.hide();
+            }
+        }
+
+    };
+    executeHiddenAdd( $("#widgetHiddenAdd") );
+});
+</script>
+
+</body>
+</html>
