@@ -39,37 +39,38 @@
 <script>
 $(document).ready(function () {
 
-    function executeHiddenAdd(parentWrap) {
-        var maxRecord = 4;
-        var shownVar = parentWrap.find(".shownVar");
-        var shown = parseInt(shownVar.val(), 10);
-        var addButton = parentWrap.find(".addButton");
+	function executeHiddenAdd(parentWrap) {
+		var maxRecord = 4;
+		var shownVar = parentWrap.find(".shownVar");
+		var shown = parseInt(shownVar.val(), 10);
+		var addButton = parentWrap.find(".addButton");
 
-        if (isNaN(shown) || shown < 2) {
-            shown = 2;
-        }
-        //alert( shown );
-        (function () {
-            for (i = maxRecord; i > shown; i--) {
-                $(".record" + i).hide();
-            }
+		if (isNaN(shown) || shown < 2) {
+			shown = 2;
+		}
+		//alert( shown );
+		(function () {
+			for (i = maxRecord; i > shown; i--) {
+				parentWrap.find(".record" + i).hide();
+			}
         })();
-        testMaxReached();
+		testMaxReached();
 
-        addButton.on('click', function () {
-            $(".record" + (++shown)).show();
-            shownVar.val(shown);
-            testMaxReached()
-        });
+		addButton.on('click', function () {
+			parentWrap.find(".record" + (++shown)).show();
+			shownVar.val(shown);
+			testMaxReached()
+		});
 
-        function testMaxReached() {
-            if (shown >= maxRecord) {
-                addButton.hide();
-            }
-        }
+		function testMaxReached() {
+			if (shown >= maxRecord) {
+				addButton.hide();
+			}
+		}
 
-    };
-    executeHiddenAdd( $("#widgetHiddenAdd") );
+	};
+	executeHiddenAdd( $("#widgetHiddenAdd") );
+	
 });
 </script>
 
